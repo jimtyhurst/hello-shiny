@@ -1,12 +1,27 @@
 library(shiny)
 
+# Based on code from:
+#   https://shiny.rstudio.com/articles/build.html
+
 # UI for miles per gallon application
 shinyUI(pageWithSidebar(
   
-  # Application title
+  # Application title.
   headerPanel("Miles Per Gallon"),
   
-  sidebarPanel(),
+  # Sidebar with controls to select the variable to plot against mpg
+  # and to specify whether outliers should be included.
+  sidebarPanel(
+    selectInput("variable", "Variable:",
+                list("Cylinders" = "cyl", 
+                     "Transmission" = "am", 
+                     "Gears" = "gear")),
+    checkboxInput("outliers", "Show outliers", TRUE)
+  ),
   
-  mainPanel()
+  # Show the caption and plot of the requested variable against mpg.
+  mainPanel(
+    h3(textOutput("caption")),
+    plotOutput("mpgPlot")
+  )
 ))
