@@ -40,13 +40,9 @@ shinyServer(function(input, output) {
 
   # Translate variable selection to displayable name.
   variableNameMap <- list("cyl" = "Cylinders", "am" = "Transmission", "gear" = "Gears")
-  variableName <- reactive({
-    return(variableNameMap[[input$variable]])
-  })
-  
   frequencyTitle <- "Frequency of Observations"
   frequencyXLabel <- reactive({
-    paste("Number of", variableName())
+    paste("Number of", variableNameMap[[input$variable]])
   })
   frequencyYLabel <- "Frequency"
   
