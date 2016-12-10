@@ -22,6 +22,7 @@ shinyUI(pageWithSidebar(
   # Show the caption and plot of the requested variable against mpg.
   mainPanel(
     h3(textOutput("caption")),
-    plotOutput("mpgPlot")
+    plotOutput("mpgPlot"),
+    plotOutput("properties")
   )
 ))

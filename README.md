@@ -5,8 +5,8 @@ Simple example of a web application written in [R](https://www.r-project.org/), 
 To run the web app in an R session from the root directory of the project, using the default `runApp` parameters:
 
 ```
-> library(shiny)
-> shiny::runApp()
+library(shiny)
+shiny::runApp()
 
 Listening on http://127.0.0.1:4304
 ```
@@ -14,5 +14,5 @@ Listening on http://127.0.0.1:4304
 See [`shiny::runApp` documentation](https://shiny.rstudio.com/reference/shiny/latest/runApp.html) for options for running the web application, including setting the `appDir`, `host`, or `port` parameters:
 
 ```
-> ?shiny::runApp
+?shiny::runApp
 ```
