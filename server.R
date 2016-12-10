@@ -15,7 +15,7 @@ mpgData$am <- factor(mpgData$am, labels = c("Automatic", "Manual"))
 shinyServer(function(input, output) {
   
   ####################
-  # Generate a plot of the requested variable against mpg and only 
+  # Generate a plot of the requested variable against mpg.
   
   # Compute the formula text in a reactive expression since it is 
   # shared by the output$caption and output$mpgPlot expressions.
