@@ -14,6 +14,9 @@ mpgData$am <- factor(mpgData$am, labels = c("Automatic", "Manual"))
 # miles per gallon (mpg).
 shinyServer(function(input, output) {
   
+  ####################
+  # Generate a plot of the requested variable against mpg.
+  
   # Compute the formula text in a reactive expression since it is 
   # shared by the output$caption and output$mpgPlot expressions.
   formulaText <- reactive({
@@ -25,11 +28,31 @@ shinyServer(function(input, output) {
     formulaText()
   })
   
-  # Generate a plot of the requested variable against mpg and only 
-  # include outliers if requested.
+  # Only include outliers if requested.
   output$mpgPlot <- renderPlot({
     boxplot(as.formula(formulaText()), 
             data = mpgData,
             outline = input$outliers)
   })
+  
+  ####################
+  # Generate a histogram of observations for the selected property.
+
+  # Translate variable selection to displayable name.
+  variableNameMap <- list("cyl" = "Cylinders", "am" = "Transmission", "gear" = "Gears")
+  frequencyTitle <- "Frequency of Observations"
+  frequencyXLabel <- reactive({
+    paste("Number of", variableNameMap[[input$variable]])
+  })
+  frequencyYLabel <- "Frequency"
+  
+  output$properties <- renderPlot({
+    if (isCategorical[[input$variable]]) {
+      plot(mpgData[, input$variable], main = frequencyTitle, ylab = frequencyYLabel)
+    } else {
+      hist(mpgData[, input$variable], main = frequencyTitle, xlab = frequencyXLabel(), ylab = frequencyYLabel)
+    }
+  })
+  
+  isCategorical <- list("cyl" = FALSE, "am" = TRUE, "gear" = FALSE)
 })
