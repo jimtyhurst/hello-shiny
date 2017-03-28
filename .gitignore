@@ -35,6 +35,7 @@ vignettes/*.pdf
 
 # Local files
 .Rlibrary
+rsconnect/
 
 # Mac OS X system files
 .DS_Store
